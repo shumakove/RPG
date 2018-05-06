@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 // 3rd-person movement that picks direction relative to target (usually the camera)
@@ -42,7 +43,7 @@ public class PointClickMovement : MonoBehaviour {
     void Update() {
 
         Vector3 movement = Vector3.zero;
-        if(Input.GetMouseButton(0)) {
+        if(Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit mouseHit;
             if(Physics.Raycast(ray,out mouseHit)) {

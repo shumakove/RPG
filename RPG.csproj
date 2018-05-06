@@ -259,12 +259,15 @@
     <Compile Include="Assets\Scripts\BaseDevice.cs" />
     <Compile Include="Assets\Scripts\BasicUI.cs" />
     <Compile Include="Assets\Scripts\CollectibleItem.cs" />
+    <Compile Include="Assets\Scripts\Controllers\SceneController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\UIController.cs" />
     <Compile Include="Assets\Scripts\Devices\ColorChangeDevice.cs" />
     <Compile Include="Assets\Scripts\Devices\DeviceOperator.cs" />
     <Compile Include="Assets\Scripts\Devices\DeviceTrigger.cs" />
     <Compile Include="Assets\Scripts\Devices\DoorOpenDevice.cs" />
     <Compile Include="Assets\Scripts\Fireball.cs" />
     <Compile Include="Assets\Scripts\GameEvent.cs" />
+    <Compile Include="Assets\Scripts\InventoryPopup.cs" />
     <Compile Include="Assets\Scripts\Managers\IGameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\Managers\Managers.cs" />
@@ -275,7 +278,7 @@
     <Compile Include="Assets\Scripts\PlayerCharacter.cs" />
     <Compile Include="Assets\Scripts\PointClickMovement.cs" />
     <Compile Include="Assets\Scripts\ReactiveTarget.cs" />
-    <Compile Include="Assets\Scripts\SceneController.cs" />
+    <Compile Include="Assets\Scripts\RelativeMovement.cs" />
     <Compile Include="Assets\Scripts\Services\NetworkService.cs" />
     <Compile Include="Assets\Scripts\WanderingAI.cs" />
   </ItemGroup>
