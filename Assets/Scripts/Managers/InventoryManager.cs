@@ -5,13 +5,10 @@ using System.Collections.Generic;
 public class InventoryManager : MonoBehaviour, IGameManager {
 	public ManagerStatus status {get; private set;}
 
-    private NetworkService networkService;
-	private Dictionary<string, int> _items;
+    private Dictionary<string, int> _items;
 	public string equippedItem {get; private set;}
 
     public void Startup(NetworkService networkService) {
-        this.networkService = networkService;
-
         Debug.Log("Inventory manager starting...");
 
 		_items = new Dictionary<string, int>();
@@ -76,4 +73,12 @@ public class InventoryManager : MonoBehaviour, IGameManager {
 		Debug.Log("Unequipped");
 		return false;
 	}
+
+    public Dictionary<string, int> GetData() {
+        return _items;
+    }
+
+    public void UpdateData(Dictionary<string, int> items) {
+        _items = items;
+    }
 }

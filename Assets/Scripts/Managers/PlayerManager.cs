@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public class PlayerManager : MonoBehaviour, IGameManager {
 	public ManagerStatus status {get; private set;}
 
-    private NetworkService networkService;
+
 	public int health {get; private set;}
 	public int maxHealth {get; private set;}
 
     public void Startup(NetworkService networkService) {
-        this.networkService = networkService;
+        
         Debug.Log("Player manager starting...");
 
 		// these values could be initialized with saved data
@@ -29,6 +29,18 @@ public class PlayerManager : MonoBehaviour, IGameManager {
 			health = 0;
 		}
 
+        if(health == 0) {
+            Messenger.Broadcast(GameEvent.LEVEL_FAILED);
+        }
         Messenger.Broadcast(GameEvent.HEALTH_UPDATED);
 	}
+
+    public void Respawn() {
+        UpdateData(50, 100);
+    }
+
+    public void UpdateData(int health, int maxHealth) {
+        this.health = health;
+        this.maxHealth = maxHealth;
+    }
 }

@@ -9,14 +9,19 @@ public class UIController : MonoBehaviour {
     private Text healthLabel;
     [SerializeField]
     private InventoryPopup popup;
+    [SerializeField]
+    private Text levelEnding;
 
 	private void Awake() {
         Messenger.AddListener(GameEvent.HEALTH_UPDATED, OnHealthUpdated);
+        Messenger.AddListener(GameEvent.LEVEL_COMPLETE, OnLevelComplete);
+        Messenger.AddListener(GameEvent.LEVEL_FAILED, OnLevelFailed);
 	}
 
 	// Use this for initialization
 	void Start () {
         OnHealthUpdated();
+        levelEnding.gameObject.SetActive(false);
         popup.gameObject.SetActive(false);
 	}
 	
@@ -31,6 +36,8 @@ public class UIController : MonoBehaviour {
 
 	private void OnDestroy() {
         Messenger.RemoveListener(GameEvent.HEALTH_UPDATED, OnHealthUpdated);
+        Messenger.RemoveListener(GameEvent.LEVEL_COMPLETE, OnLevelComplete);
+        Messenger.RemoveListener(GameEvent.LEVEL_FAILED, OnLevelFailed);
 	}
 
     void OnHealthUpdated() {
@@ -38,5 +45,32 @@ public class UIController : MonoBehaviour {
                                                   + "/"
                                                   + Managers.Player.maxHealth;
         healthLabel.text = healthText;
+    }
+
+    private void OnLevelComplete() {
+        StartCoroutine(CompleteLevel());
+    }
+
+    private void OnLevelFailed() {
+        StartCoroutine(FailLevel());
+    }
+
+    private IEnumerator CompleteLevel() {
+        levelEnding.gameObject.SetActive(true);
+        levelEnding.text = "Level Complete!";
+
+        yield return new WaitForSeconds(2);
+
+        Managers.Mission.GoToNext();
+    }
+
+    private IEnumerator FailLevel() {
+        levelEnding.gameObject.SetActive(true);
+        levelEnding.text = "Level Failed";
+
+        yield return new WaitForSeconds(2);
+
+        Managers.Player.Respawn();
+        Managers.Mission.RestartCurrent();
     }
 }

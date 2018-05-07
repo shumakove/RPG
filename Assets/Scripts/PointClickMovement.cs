@@ -18,23 +18,20 @@ public class PointClickMovement : MonoBehaviour {
     public float jumpSpeed = 15.0f;
     public float gravity = -9.8f;
     public float terminalVelocity = -20.0f;
-    public float minFall = -1.5f;
+
     public float pushForce = 3.0f;
     public float deceleration = 20.0f;
     public float targetBuffer = 1.5f;
 
     private float _curspeed = 0f;
     private Vector3 _targetPos = Vector3.one;
-    private float _vertSpeed;
-    private ControllerColliderHit _contact;
-
+   
     private CharacterController _charController;
     private Animator _animator;
 
     // Use this for initialization
     void Start() {
-        _vertSpeed = minFall;
-
+        
         _charController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
     }
@@ -118,8 +115,6 @@ public class PointClickMovement : MonoBehaviour {
 
     // store collision to use in Update
     void OnControllerColliderHit(ControllerColliderHit hit) {
-        _contact = hit;
-
         Rigidbody body = hit.collider.attachedRigidbody;
         if (body != null && !body.isKinematic) {
             body.velocity = hit.moveDirection * pushForce;
