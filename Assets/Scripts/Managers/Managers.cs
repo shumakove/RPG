@@ -6,11 +6,13 @@ using System.Collections.Generic;
 [RequireComponent(typeof(InventoryManager))]
 [RequireComponent(typeof(DataManager))]
 public class Managers : MonoBehaviour {
+
     public static DataManager Data { get; private set; }
 	public static PlayerManager Player {get; private set;}
 	public static InventoryManager Inventory {get; private set;}
     public static MissionManager Mission { get; private set; }
 
+    public static NetworkService networkService;
 	private List<IGameManager> _startSequence;
 	
 	void Awake() {
@@ -31,7 +33,7 @@ public class Managers : MonoBehaviour {
 	}
 
 	private IEnumerator StartupManagers() {
-        NetworkService networkService = new NetworkService();
+        networkService = new NetworkService();
         foreach (IGameManager manager in _startSequence) {
             manager.Startup(networkService);
 		}
@@ -43,7 +45,7 @@ public class Managers : MonoBehaviour {
 		
 		while (numReady < numModules) {
 			int lastReady = numReady;
-			numReady = 0;
+			
 			
 			foreach (IGameManager manager in _startSequence) {
 				if (manager.status == ManagerStatus.Started) {
@@ -59,7 +61,7 @@ public class Managers : MonoBehaviour {
 			yield return null;
 		}
 		
-		Debug.Log("All managers started up");
+		Debug.Log("All managers started up!!!");
         Messenger.Broadcast(StartupEvent.MANAGERS_STARTED);
 	}
 }

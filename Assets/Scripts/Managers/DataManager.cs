@@ -58,8 +58,7 @@ public class DataManager : MonoBehaviour, IGameManager {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Update() {
+        
+    }
 }

@@ -265,7 +265,6 @@
     <Compile Include="Assets\Scripts\BaseDevice.cs" />
     <Compile Include="Assets\Scripts\BasicUI.cs" />
     <Compile Include="Assets\Scripts\CollectibleItem.cs" />
-    <Compile Include="Assets\Scripts\Controllers\SceneAutoLoader.cs" />
     <Compile Include="Assets\Scripts\Controllers\SceneController.cs" />
     <Compile Include="Assets\Scripts\Controllers\StartupController.cs" />
     <Compile Include="Assets\Scripts\Controllers\UIController.cs" />

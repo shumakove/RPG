@@ -25,7 +25,7 @@ public class MissionManager : MonoBehaviour, IGameManager {
     public void Startup(NetworkService networkService) {
         Debug.Log("Mission manager started ...");
         _networkService = networkService;
-        UpdateData(0, 1);
+        UpdateData(0, 2);
         status = ManagerStatus.Started;
     }
 
@@ -46,7 +46,7 @@ public class MissionManager : MonoBehaviour, IGameManager {
             Debug.Log("Loading " + name);
             SceneManager.LoadScene(name);
         } else {
-            Debug.Log("Last level");
+            Messenger.Broadcast(GameEvent.GAME_COMPLETE);
         }
     }
 
